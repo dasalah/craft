@@ -942,6 +942,55 @@ function addEditTimeSlotListeners() {
   });
 }
 
+async function downloadScheduleAsPDF() {
+  const { jsPDF } = window.jspdf; 
+
+  const table = document.querySelector('.schedule-table');
+  
+  table.classList.add('pdf-export');
+  
+  try {
+    const canvas = await html2canvas(table, {
+      scale: 1.5, 
+      useCORS: true, 
+      backgroundColor: 'black',
+    });
+
+    const imgData = canvas.toDataURL('image/png',0.7);    
+    const pdf = new jsPDF('landscape', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pdfWidth - 20; 
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    
+    let heightLeft = imgHeight;
+    let positionY = 10; 
+
+    pdf.addImage(imgData, 'PNG', 10, positionY, imgWidth, imgHeight);
+    heightLeft -= pdfHeight - 20; 
+    
+    while (heightLeft > 0) {
+      pdf.addPage();
+      positionY = heightLeft - imgHeight + 10; 
+      pdf.addImage(imgData, 'PNG', 10, positionY, imgWidth, imgHeight);
+      heightLeft -= pdfHeight - 20;
+    }
+    
+    pdf.save('برنامه هفتگی.pdf');
+    
+    showNotification('دانلود موفق', 'برنامه هفتگی به صورت PDF دانلود شد!');
+  } catch (error) {
+    console.error('خطا در تولید PDF:', error);
+    showNotification('خطا', 'مشکلی در تولید PDF رخ داد. لطفاً دوباره امتحان کنید.');
+  } finally {
+    table.classList.remove('pdf-export');
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('downloadPDF').addEventListener('click', downloadScheduleAsPDF);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   loadAndApplyCustomTimeSlots();
   renderSavedClasses();
