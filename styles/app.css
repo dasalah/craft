@@ -89,6 +89,35 @@ h1 {
   position: relative;
 }
 
+.download-btn {
+  font-family: "Vazirmatn", sans-serif;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 50%; 
+  width: 240px;
+  height: 80px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center; 
+  padding: 0; 
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #2980b9, #3498db);
+}
+
 h1::after {
   content: "";
   position: absolute;
