@@ -1,647 +1,583 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-  <head>
-    <link rel="icon" type="image/x-icon" href="assets/fav.png" />
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles/app.css" />
-    <title>Ticki Do!</title>
-  </head>
-  <body>
-    <div id="welcomeModal" class="modal">
-      <div class="modal-content">
-        <span id="welcomeModalClose" class="close">&times;</span>
-        <h2 style="color: #fff; margin-bottom: 20px; text-align: center">
-          سلام و درود!
-        </h2>
-        <p style="color: #ddd; text-align: center; line-height: 1.6">
-          تمام اطلاعات شما در این صفحه تنها در مرورگر شما ذخیره می‌شود و ما هیچ
-          دسترسی به اطلاعات شما نداریم، لذا در صورت پاک کردن داده‌های مرورگر خود،
-          تمام اطلاعات ذخیره شده حذف خواهند شد.
-        </p>
-      </div>
-    </div>
-
-    <div class="notification-bar" id="notificationBar">
-      <span id="notificationMessage"></span>
-      <button class="notification-close" id="notificationClose">×</button>
-    </div>
-
-    <div
-      class="notification-icon"
-      id="notificationIcon"
-      title="نمایش یادآوری کلاس"
-    ></div>
-
-    <div class="main-container fade-in">
-      <div class="schedule-wrapper fade-in">
-        <h1>برنامه کلاسی هفتگی</h1>
-        <button id="downloadPDF" class="download-btn">دانلود برنامه به صورت PDF</button>
-        <table class="schedule-table">
-          <thead>
-            <tr class="time-header-row">
-              <th class="time-header-cell">ساعت کلاسی</th>
-              <th class="time-header-cell">
-                <span>07:30 - 09:30</span>
-                <button class="edit-time-btn" title="ویرایش ساعت">✎</button>
-              </th>
-              <th class="time-header-cell">
-                <span>09:30 - 11:30</span>
-                <button class="edit-time-btn" title="ویرایش ساعت">✎</button>
-              </th>
-              <th class="time-header-cell">
-                <span>13:00 - 15:00</span>
-                <button class="edit-time-btn" title="ویرایش ساعت">✎</button>
-              </th>
-              <th class="time-header-cell">
-                <span>15:00 - 17:00</span>
-                <button class="edit-time-btn" title="ویرایش ساعت">✎</button>
-              </th>
-              <th class="time-header-cell">
-                <span>18:00 - 20:00</span>
-                <button class="edit-time-btn" title="ویرایش ساعت">✎</button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="day-header">شنبه</td>
-              <td class="class-cell" data-day="شنبه" data-time="07:30 - 09:30">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="برنامه کلاسی هفتگی دانشجویی - مدیریت و سازماندهی برنامه کلاسی">
+    <meta name="theme-color" content="#1B3A52">
+    <title>برنامه کلاسی هفتگی</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/cards.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="app-header" role="banner">
+        <div class="header-container">
+            <div class="header-right">
+                <div class="logo-container">
+                    <img src="assets/logo.svg" alt="لوگو برنامه کلاسی" class="app-logo">
                 </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="شنبه" data-time="09:30 - 11:30">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
+                <div class="app-title-section">
+                    <h1 class="app-title">برنامه کلاسی هفتگی</h1>
+                    <p class="app-subtitle">سامانه مدیریت برنامه درسی</p>
                 </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="شنبه" data-time="13:00 - 15:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="شنبه" data-time="15:00 - 17:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="شنبه" data-time="18:00 - 20:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="day-header">یک‌شنبه</td>
-              <td class="class-cell" data-day="یک‌شنبه" data-time="07:30 - 09:30">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td
-                class="class-cell"
-                data-day="یک‌شنبه"
-                data-time="09:30 - 11:30"
-              >
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="یک‌شنبه" data-time="13:00 - 15:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="یک‌شنبه" data-time="15:00 - 17:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="یک‌شنبه" data-time="18:00 - 20:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="day-header">دوشنبه</td>
-              <td class="class-cell" data-day="دوشنبه" data-time="07:30 - 09:30">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="دوشنبه" data-time="09:30 - 11:30">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="دوشنبه" data-time="13:00 - 15:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="دوشنبه" data-time="15:00 - 17:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="دوشنبه" data-time="18:00 - 20:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="day-header">سه‌شنبه</td>
-              <td class="class-cell" data-day="سه‌شنبه" data-time="07:30 - 09:30">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td
-                class="class-cell"
-                data-day="سه‌شنبه"
-                data-time="09:30 - 11:30"
-              >
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="سه‌شنبه" data-time="13:00 - 15:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="سه‌شنبه" data-time="15:00 - 17:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="سه‌شنبه" data-time="18:00 - 20:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="day-header">چهارشنبه</td>
-              <td
-                class="class-cell"
-                data-day="چهارشنبه"
-                data-time="07:30 - 09:30"
-              >
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td
-                class="class-cell"
-                data-day="چهارشنبه"
-                data-time="09:30 - 11:30"
-              >
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="چهارشنبه" data-time="13:00 - 15:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="چهارشنبه" data-time="15:00 - 17:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class= "class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-              <td class="class-cell" data-day="چهارشنبه" data-time="18:00 - 20:00">
-                <div class="add-class-btn">+</div>
-                <div class="class-content">
-                  <div class="class-part subject"></div>
-                  <div class="class-part room"></div>
-                  <div class="class-part exam"></div>
-                </div>
-                <button class="delete-btn">×</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <section class="main-sec">
-        <div class="main-right">
-          <div class="todo-sidebar fade-in">
-            <h2 class="section-title">افزودن کار جدید</h2>
-
-            <form class="todo-form">
-              <div class="todo-input-group">
-                <input
-                  type="text"
-                  id="todoInput"
-                  placeholder="در مورد کارت بنویس..."
-                  required
-                />
-              </div>
-
-              <div class="todo-meta-inputs">
-                <div class="form-field">
-                  <label for="todoCategory">دسته‌بندی:</label>
-                  <select id="todoCategory" class="todo-select">
-                    <option value="personal">شخصی</option>
-                    <option value="study">تحصیلی</option>
-                    <option value="work">کار</option>
-                    <option value="shopping">خرید</option>
-                  </select>
-                </div>
-                <div class="form-field">
-                  <label for="todoImportance">اولویت:</label>
-                  <select id="todoImportance" class="todo-select">
-                    <option value="low">کم</option>
-                    <option value="medium">متوسط</option>
-                    <option value="high">زیاد</option>
-                    <option value="critical">خیلی زیاد</option>
-                  </select>
-                </div>
-              </div>
-              <button type="submit" class="todo-submit-btn">افزودن کار</button>
-            </form>
-          </div>
-          <div class="todo-sidebar2 fade-in">
-            <div class="todo-footer">
-              <h2 class="section-title">لیست کارها</h2>
-              <div class="todo-filters">
-                <div class="filter-section">
-                  <div class="filter-group">
-                    <button class="filter-btn active" data-filter="all">
-                      همه
-                    </button>
-                    <button class="filter-btn" data-filter="active">
-                      انجام نشده
-                    </button>
-                    <button class="filter-btn" data-filter="completed">
-                      انجام شده
-                    </button>
-                  </div>
-                  <div>
-                    <button class="clear-todo-btn">پاک کردن تمام کارها</button>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div class="category-filter-section">
-              <select id="categoryFilter" class="todo-select">
-                <option value="all">همه دسته‌ها</option>
-                <option value="personal">شخصی</option>
-                <option value="study">تحصیلی</option>
-                <option value="work">کار</option>
-                <option value="shopping">خرید</option>
-              </select>
+            
+            <div class="header-left">
+                <div class="student-info-display" id="studentInfoDisplay">
+                    <div class="student-avatar">
+                        <span class="avatar-text" id="studentAvatar">دانشجو</span>
+                    </div>
+                    <div class="student-details">
+                        <span class="student-name" id="displayStudentName">نام دانشجو</span>
+                        <span class="student-id" id="displayStudentId">شماره دانشجویی</span>
+                    </div>
+                </div>
+                
+                <button class="icon-btn" id="editStudentBtn" aria-label="ویرایش اطلاعات دانشجو" title="ویرایش اطلاعات">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                </button>
+                
+                <button class="icon-btn theme-toggle" id="themeToggle" aria-label="تغییر تم" title="تغییر تم">
+                    <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </div>
-            <div class="empty-todo empty-todo-invisible">
-              لیست کارها خالی است!
-            </div>
-            <ul id="todoList"></ul>
-          </div>
         </div>
-        <div class="pomodoro-container fade-in">
-          <h2 class="section-title">تایمر پومودورو</h2>
-          <div class="pomodoro-major">
-            <div class="pomodoro-circle">
-              <svg>
-                <circle class="bg-circle" cx="110" cy="110" r="90" />
-                <circle
-                  id="progress-circle"
-                  class="progress-circle"
-                  cx="110"
-                  cy="110"
-                  r="90"
-                />
-              </svg>
-              <div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <!-- Statistics Cards -->
+        <section class="stats-section" aria-label="آمار کلاس‌ها">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #C9A961 0%, #B89851 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="totalClasses">0</h3>
+                        <p class="stat-label">کل کلاس‌ها</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #1B3A52 0%, #0F2A3C 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="totalHours">0</h3>
+                        <p class="stat-label">ساعت در هفته</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #C9A961 0%, #1B3A52 100%);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="todayClasses">0</h3>
+                        <p class="stat-label">کلاس‌های امروز</p>
+                    </div>
+                </div>
             </div>
-            <div class="pomodoro-mode" id="pomodoroMode">کار</div>
-            <div class="pomodoro-controls">
-              <button
-                class="pomodoro-btn"
-                id="pomodoroStart"
-                title="شروع تایمر"
-              >
-                <svg
-                  style="width: 34px; height: 34px; text-align: center"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="size-2"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+        </section>
 
-                <span class="pomodoro-tooltip">شروع تایمر</span>
-              </button>
-              <button
-                class="pomodoro-btn"
-                id="pomodoroReset"
-                title="تنظیم مجدد"
-              >
-                <svg
-                  style="width: 34px; height: 34px; text-align: center"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-
-                <span class="pomodoro-tooltip">تنظیم مجدد</span>
-              </button>
-              <button
-                class="pomodoro-btn settings"
-                id="pomodoroSettings"
-                title="تنظیمات"
-              >
-                <svg
-                  style="width: 34px; height: 34px; text-align: center"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.923 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-
-                <span class="pomodoro-tooltip">تنظیمات</span>
-              </button>
+        <!-- Day Selector -->
+        <section class="day-selector-section" aria-label="انتخاب روز">
+            <div class="day-tabs" role="tablist">
+                <button class="day-tab active" role="tab" data-day="saturday" aria-selected="true">
+                    <span class="day-name">شنبه</span>
+                    <span class="day-count" data-count="saturday">0</span>
+                </button>
+                <button class="day-tab" role="tab" data-day="sunday" aria-selected="false">
+                    <span class="day-name">یکشنبه</span>
+                    <span class="day-count" data-count="sunday">0</span>
+                </button>
+                <button class="day-tab" role="tab" data-day="monday" aria-selected="false">
+                    <span class="day-name">دوشنبه</span>
+                    <span class="day-count" data-count="monday">0</span>
+                </button>
+                <button class="day-tab" role="tab" data-day="tuesday" aria-selected="false">
+                    <span class="day-name">سه‌شنبه</span>
+                    <span class="day-count" data-count="tuesday">0</span>
+                </button>
+                <button class="day-tab" role="tab" data-day="wednesday" aria-selected="false">
+                    <span class="day-name">چهارشنبه</span>
+                    <span class="day-count" data-count="wednesday">0</span>
+                </button>
+                <button class="day-tab" role="tab" data-day="thursday" aria-selected="false">
+                    <span class="day-name">پنج‌شنبه</span>
+                    <span class="day-count" data-count="thursday">0</span>
+                </button>
+                <button class="day-tab" role="tab" data-day="friday" aria-selected="false">
+                    <span class="day-name">جمعه</span>
+                    <span class="day-count" data-count="friday">0</span>
+                </button>
             </div>
-          </div>
-          <div class="pomodoro-footer">
-            <span class="pomodoro-info">
-فن پومودورو یا تکنیک پومودورو یکی از روش‌های مدیریت زمان، ابداع‌شده توسط فرانچسکو چیریلواست. بر طبق این روش بهترین تکهٔ زمانی برای کار کردن ۲۵ دقیقه است که برابر است با مدت زمان لازم برای درست‌کردن سس پومودورو که یک سس گوجه‌فرنگی سنتی ایتالیایی است. فرد پس از ۲۵ دقیقه کار باید برای مدت کوتاهی مثلاً ۳ تا ۵ دقیقه استراحت کند.
-            </span>
-            <div class="datetime-display" id="datetimeDisplay"></div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <div class="pomodoro-stats fade-in">
-        <button class="clear-stats-btn" id="clearStatsBtn">
-          <svg
-            style="width: 20px; height: 20px; text-align: center"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-              clip-rule="evenodd"
-            />
-          </svg>
+        <!-- Schedule Cards Grid -->
+        <section class="schedule-section" aria-label="برنامه کلاسی">
+            <div class="schedule-header">
+                <h2 class="section-title">برنامه کلاسی</h2>
+                <button class="btn-primary btn-add" id="addClassBtn" aria-label="افزودن کلاس جدید">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>افزودن کلاس</span>
+                </button>
+            </div>
 
-          <span class="clear-stats-tooltip">پاک کردن داده‌ها</span>
+            <!-- Schedule Cards Container -->
+            <div class="schedule-cards-container" id="scheduleCardsContainer">
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">هنوز کلاسی اضافه نشده</h3>
+                    <p class="empty-description">برای شروع، روی دکمه "افزودن کلاس" کلیک کنید</p>
+                </div>
+
+                <!-- Cards will be dynamically inserted here -->
+                <div class="schedule-cards-grid" id="scheduleCards">
+                    <!-- Example card structure (will be generated by JS) -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons Section -->
+        <section class="actions-section" aria-label="عملیات">
+            <div class="actions-grid">
+                <button class="action-btn btn-download" id="downloadPdfBtn" aria-label="دانلود PDF">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>دانلود PDF</span>
+                </button>
+
+                <button class="action-btn btn-preview" id="previewPdfBtn" aria-label="پیشنمایش PDF">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span>پیشنمایش PDF</span>
+                </button>
+
+                <button class="action-btn btn-excel" id="downloadExcelBtn" aria-label="دانلود Excel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span>دانلود Excel</span>
+                </button>
+
+                <button class="action-btn btn-share" id="shareBtn" aria-label="اشتراک‌گذاری">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    <span>اشتراک‌گذاری</span>
+                </button>
+
+                <button class="action-btn btn-clear" id="clearAllBtn" aria-label="پاک کردن همه">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>پاک کردن همه</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav" role="navigation" aria-label="منوی موبایل">
+        <button class="mobile-nav-item active" data-page="schedule" aria-label="برنامه کلاسی">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>برنامه</span>
         </button>
-        <h2 class="section-title">آمار مطالعه امروز</h2>
-        <div class="stats-container">
-          <div class="stat-item">
-            <div class="stat-value" id="todayPomodoros">0</div>
-            <div class="stat-label">پومودورو</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="todayMinutes">0</div>
-            <div class="stat-label">مدت مطالعه</div>
-          </div>
+        
+        <button class="mobile-nav-item" id="mobileAddBtn" aria-label="افزودن کلاس">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>افزودن</span>
+        </button>
+        
+        <button class="mobile-nav-item" data-page="export" aria-label="خروجی">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>خروجی</span>
+        </button>
+        
+        <button class="mobile-nav-item" id="mobileSettingsBtn" aria-label="تنظیمات">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3"></path>
+            </svg>
+            <span>تنظیمات</span>
+        </button>
+    </nav>
+
+    <!-- Student Info Modal -->
+    <div class="modal" id="studentInfoModal" role="dialog" aria-labelledby="studentModalTitle" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="studentModalTitle" class="modal-title">اطلاعات دانشجو</h2>
+                <button class="modal-close" aria-label="بستن" data-close="studentInfoModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="studentInfoForm" class="form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">نام</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">نام خانوادگی</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" placeholder="نام خانوادگی خود را وارد کنید" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentId" class="form-label">شماره دانشجویی</label>
+                        <input type="text" id="studentId" name="studentId" class="form-input" placeholder="شماره دانشجویی خود را وارد کنید" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="major" class="form-label">رشته تحصیلی</label>
+                        <input type="text" id="major" name="major" class="form-input" placeholder="رشته تحصیلی خود را وارد کنید" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="semester" class="form-label">ترم</label>
+                        <select id="semester" name="semester" class="form-input" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="1">ترم اول</option>
+                            <option value="2">ترم دوم</option>
+                            <option value="3">ترم سوم</option>
+                            <option value="4">ترم چهارم</option>
+                            <option value="5">ترم پنجم</option>
+                            <option value="6">ترم ششم</option>
+                            <option value="7">ترم هفتم</option>
+                            <option value="8">ترم هشتم</option>
+                        </select>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" data-close="studentInfoModal">انصراف</button>
+                        <button type="submit" class="btn-primary">ذخیره اطلاعات</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="achievements">
-          <div class="achievement" id="achievement1">
-            <span>🥉</span>
-            <div class="achievement-tooltip">4 پومودورو</div>
-          </div>
-          <div class="achievement" id="achievement2">
-            <span>🥈</span>
-            <div class="achievement-tooltip">8 پومودورو</div>
-          </div>
-          <div class="achievement" id="achievement3">
-            <span>🥇</span>
-            <div class="achievement-tooltip">12 پومودورو</div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div id="classModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 style="color: #fff; margin-bottom: 20px; text-align: center">
-          افزودن درس
-        </h2>
-        <form id="classForm">
-          <div class="form-group">
-            <input
-              type="text"
-              id="subjectName"
-              name="subjectName"
-              placeholder="نام درس"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="examDate"
-              name="examDate"
-              placeholder="تاریخ امتحان"
-            />
-          </div>
-          <div class="form-group-checkbox">
-            <input type="checkbox" id="unknownExam" name="unknownExam" />
-            <label for="unknownExam">نامعلوم</label>
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="roomNumber"
-              name="roomNumber"
-              placeholder="شماره کلاس"
-            />
-          </div>
-          <div class="form-group-checkbox">
-            <input type="checkbox" id="unknownRoom" name="unknownRoom" />
-            <label for="unknownRoom">نامعلوم</label>
-          </div>
-          <button type="submit" class="submit-btn">افزودن درس</button>
-        </form>
-      </div>
+    <!-- Add Class Modal -->
+    <div class="modal" id="addClassModal" role="dialog" aria-labelledby="addClassModalTitle" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="addClassModalTitle" class="modal-title">افزودن کلاس جدید</h2>
+                <button class="modal-close" aria-label="بستن" data-close="addClassModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addClassForm" class="form">
+                    <div class="form-group">
+                        <label for="subject" class="form-label">نام درس</label>
+                        <input type="text" id="subject" name="subject" class="form-input" placeholder="مثال: ریاضیات پیشرفته" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teacher" class="form-label">نام استاد</label>
+                        <input type="text" id="teacher" name="teacher" class="form-input" placeholder="مثال: دکتر احمدی" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="room" class="form-label">شماره کلاس</label>
+                            <input type="text" id="room" name="room" class="form-input" placeholder="مثال: 201" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exam" class="form-label">تاریخ امتحان</label>
+                            <input type="text" id="exam" name="exam" class="form-input" placeholder="مثال: 1403/10/15">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="day" class="form-label">روز</label>
+                            <select id="day" name="day" class="form-input" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="saturday">شنبه</option>
+                                <option value="sunday">یکشنبه</option>
+                                <option value="monday">دوشنبه</option>
+                                <option value="tuesday">سه‌شنبه</option>
+                                <option value="wednesday">چهارشنبه</option>
+                                <option value="thursday">پنج‌شنبه</option>
+                                <option value="friday">جمعه</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="time" class="form-label">ساعت</label>
+                            <input type="text" id="time" name="time" class="form-input" placeholder="مثال: 08:00 - 10:00" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">رنگ دسته‌بندی</label>
+                        <div class="color-picker">
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#C9A961" checked>
+                                <span class="color-box" style="background-color: #C9A961;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#1B3A52">
+                                <span class="color-box" style="background-color: #1B3A52;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#E74C3C">
+                                <span class="color-box" style="background-color: #E74C3C;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#3498DB">
+                                <span class="color-box" style="background-color: #3498DB;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#2ECC71">
+                                <span class="color-box" style="background-color: #2ECC71;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#9B59B6">
+                                <span class="color-box" style="background-color: #9B59B6;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#F39C12">
+                                <span class="color-box" style="background-color: #F39C12;"></span>
+                            </label>
+                            <label class="color-option">
+                                <input type="radio" name="color" value="#1ABC9C">
+                                <span class="color-box" style="background-color: #1ABC9C;"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" data-close="addClassModal">انصراف</button>
+                        <button type="submit" class="btn-primary">افزودن کلاس</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div id="editTimeModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 style="color: #fff; margin-bottom: 20px; text-align: center">
-          ویرایش ساعت کلاسی
-        </h2>
-        <form id="editTimeForm" onsubmit="return false;">
-          <div class="form-group">
-            <label for="startTimeInput">زمان شروع:</label>
-            <input
-              type="time"
-              step="60"
-              id="startTimeInput"
-              name="startTime"
-              placeholder="شروع کلاس (مثال: ۷:۳۰)"
-            />
-          </div>
-          <div class="form-group">
-            <label for="startTimeInput">زمان پایان:</label>
-            <input
-              type="time"
-              step="60"
-              id="endTimeInput"
-              name="endTime"
-              placeholder="پایان کلاس (مثال: ۹:۳۰)"
-            />
-          </div>
-          <button type="button" id="saveTimeBtn" class="submit-btn">
-            ذخیره تغییرات
-          </button>
-        </form>
-      </div>
-    </div>
-    <div id="pomodoroSettingsModal" class="pomodoro-settings-modal">
-      <div class="pomodoro-settings-content">
-        <span
-          class="close"
-          style="
-            color: #aaa;
-            float: left;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-          "
-          >&times;</span
-        >
-        <h2>تنظیمات پومودورو</h2>
-        <div class="settings-group">
-          <label for="workDuration">زمان کار (دقیقه):</label>
-          <input type="number" id="workDuration" min="1" max="60" value="25" />
+    <!-- PDF Preview Modal -->
+    <div class="modal modal-large" id="pdfPreviewModal" role="dialog" aria-labelledby="pdfPreviewModalTitle" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="pdfPreviewModalTitle" class="modal-title">پیشنمایش PDF</h2>
+                <button class="modal-close" aria-label="بستن" data-close="pdfPreviewModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="pdf-preview-container">
+                    <iframe id="pdfPreviewFrame" class="pdf-preview-frame" title="پیشنمایش PDF"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="pdfPreviewModal">بستن</button>
+                    <button type="button" class="btn-primary" id="confirmDownloadPdf">دانلود PDF</button>
+                </div>
+            </div>
         </div>
-        <div class="settings-group">
-          <label for="breakDuration">زمان استراحت (دقیقه):</label>
-          <input type="number" id="breakDuration" min="1" max="30" value="5" />
-        </div>
-        <div class="settings-actions">
-          <button class="settings-btn save" id="saveSettings">ذخیره</button>
-          <button class="settings-btn cancel" id="cancelSettings">
-            انصراف
-          </button>
-        </div>
-      </div>
     </div>
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal" role="dialog" aria-labelledby="shareModalTitle" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="shareModalTitle" class="modal-title">اشتراک‌گذاری برنامه</h2>
+                <button class="modal-close" aria-label="بستن" data-close="shareModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="share-content">
+                    <div class="qr-code-section">
+                        <h3 class="section-subtitle">کد QR</h3>
+                        <div class="qr-code-container" id="qrCodeContainer"></div>
+                    </div>
+                    
+                    <div class="share-link-section">
+                        <h3 class="section-subtitle">لینک اشتراک‌گذاری</h3>
+                        <div class="share-link-input-group">
+                            <input type="text" id="shareLink" class="form-input" readonly>
+                            <button class="btn-primary" id="copyLinkBtn" aria-label="کپی لینک">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                کپی
+                            </button>
+                        </div>
+                        <p class="copy-status" id="copyStatus"></p>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="shareModal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal" role="dialog" aria-labelledby="settingsModalTitle" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="settingsModalTitle" class="modal-title">تنظیمات</h2>
+                <button class="modal-close" aria-label="بستن" data-close="settingsModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-content">
+                    <div class="settings-group">
+                        <h3 class="settings-group-title">ظاهر</h3>
+                        <div class="settings-item">
+                            <div class="settings-item-info">
+                                <label for="settingTheme" class="settings-label">تم تیره</label>
+                                <p class="settings-description">فعال‌سازی حالت تاریک</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="settingTheme">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h3 class="settings-group-title">اطلاعات برنامه</h3>
+                        <div class="settings-item">
+                            <p class="settings-info-text">نسخه: 2.0.0</p>
+                        </div>
+                        <div class="settings-item">
+                            <p class="settings-info-text">سازنده: سامانه مدیریت برنامه کلاسی</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="settingsModal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" 
+            integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" 
+            integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" 
+            integrity="sha512-aYsZ9cMZtqvZOD3VYWZ+HmCJN4/1fU7gAFQD+NtY4vZ/x8XHGA3pKPqOBqZvJhYUGgZGfm3Q9FPFcN6hSMgKbw==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" 
+            integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfG+C4Keq3i7FADVgFLZpZJ6Fp3MsJ3gn4gDbPx08+6glg==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" 
+            integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Application Scripts -->
+    <script src="scripts/student-info.js"></script>
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/pdf-export.js"></script>
+    <script src="scripts/excel-export.js"></script>
+    <script src="scripts/share.js"></script>
     <script src="scripts/app.js"></script>
-  </body>
+</body>
 </html>
