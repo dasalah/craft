@@ -25,6 +25,9 @@ body {
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--bg-primary);
+  background-image: url('../assets/patterns/balochi-pattern.svg');
+  background-attachment: fixed;
+  background-size: 300px 300px;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -1236,5 +1239,61 @@ a {
   .class-card {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   NOTIFICATION TOAST
+   ============================================ */
+.notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: white;
+  color: var(--text-primary);
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: 10000;
+  min-width: 300px;
+  max-width: 500px;
+  font-weight: 500;
+  border-right: 4px solid var(--primary-gold);
+  transition: all var(--transition-normal);
+}
+
+body.dark-mode .notification {
+  background: var(--bg-secondary);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.notification-success {
+  border-right-color: #2ECC71;
+}
+
+.notification-error {
+  border-right-color: #E74C3C;
+}
+
+.notification-info {
+  border-right-color: #3498DB;
+}
+
+.notification-warning {
+  border-right-color: #F39C12;
+}
+
+.notification-hide {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Mobile notification positioning */
+@media (max-width: 768px) {
+  .notification {
+    bottom: 80px;
+    right: 15px;
+    left: 15px;
+    min-width: auto;
   }
 }
