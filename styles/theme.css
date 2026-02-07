@@ -1,0 +1,127 @@
+/* Theme Variables - Dark/Light Mode */
+:root {
+  /* Primary Colors from Logo */
+  --primary-gold: #C9A961;
+  --primary-gold-light: #E0C589;
+  --primary-navy: #1B3A52;
+  --primary-navy-dark: #0F2537;
+  
+  /* Light Theme Colors */
+  --bg-primary-light: #F5F7FA;
+  --bg-secondary-light: #FFFFFF;
+  --text-primary-light: #0F1419;
+  --text-secondary-light: #657786;
+  --border-light: #E1E8ED;
+  
+  /* Dark Theme Colors */
+  --bg-primary-dark: #0F1419;
+  --bg-secondary-dark: rgba(27, 58, 82, 0.3);
+  --text-primary-dark: #FFFFFF;
+  --text-secondary-dark: #AAB8C2;
+  --border-dark: rgba(201, 169, 97, 0.2);
+  
+  /* Course Category Colors */
+  --color-math: #3498DB;
+  --color-physics: #9B59B6;
+  --color-programming: #E74C3C;
+  --color-general: #2ECC71;
+  --color-lab: #F39C12;
+  
+  /* Shadows and Effects */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-backdrop: blur(10px);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+}
+
+/* Light Theme (Default) */
+body {
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border-color: var(--border-light);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #E8EDF2 100%);
+}
+
+/* Dark Theme */
+body.dark-mode {
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border-color: var(--border-dark);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 100%);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-xl);
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  backdrop-filter: var(--glass-backdrop);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-gold);
+  transition: transform var(--transition-normal);
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(20deg);
+}
+
+/* Smooth Theme Transition */
+body,
+.card,
+.modal-content,
+.glass-card,
+.header,
+.footer {
+  transition: background-color var(--transition-slow), 
+              color var(--transition-slow),
+              border-color var(--transition-slow);
+}

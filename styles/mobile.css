@@ -1,0 +1,353 @@
+/* Mobile Responsive Styles */
+
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) {
+  .schedule-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .sidebar {
+    width: 60px;
+  }
+  
+  .sidebar.expanded {
+    width: 250px;
+  }
+  
+  .header-info {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 768px) {
+  :root {
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+  }
+  
+  /* Layout */
+  .main-container {
+    padding: var(--spacing-md);
+  }
+  
+  .schedule-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  /* Header */
+  .header {
+    flex-direction: column;
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+  
+  .header-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .header-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .header-info {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Mobile Navigation */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: 2px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--spacing-sm) 0;
+    z-index: 100;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--spacing-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: all var(--transition-fast);
+  }
+  
+  .mobile-nav-item.active {
+    color: var(--primary-gold);
+  }
+  
+  .mobile-nav-item svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Hamburger Menu */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+  }
+  
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-gold);
+    border-radius: 2px;
+    transition: all var(--transition-normal);
+  }
+  
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  /* Cards */
+  .class-card {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .card {
+    padding: var(--spacing-md);
+  }
+  
+  /* Buttons */
+  .btn,
+  .primary-btn,
+  .secondary-btn {
+    min-height: 48px;
+    font-size: 1rem;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  /* Modals */
+  .modal-content {
+    width: 95%;
+    max-width: none;
+    margin: var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+  
+  .modal-header {
+    font-size: 1.25rem;
+  }
+  
+  /* Forms */
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: var(--spacing-md);
+  }
+  
+  /* Student Info Form */
+  .student-info-form {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Stats Grid */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+  
+  .stat-card {
+    padding: var(--spacing-md);
+  }
+  
+  /* Action Buttons Container */
+  .action-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .action-buttons button {
+    width: 100%;
+  }
+  
+  /* Day Selector - Horizontal Scroll */
+  .day-selector {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-md);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .day-selector::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .day-button {
+    min-width: 80px;
+    flex-shrink: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+  }
+  
+  .day-button.active {
+    background: var(--primary-gold);
+    color: white;
+    border-color: var(--primary-gold);
+  }
+  
+  /* Touch-friendly Swipe Indicators */
+  .swipe-indicator {
+    display: block;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    padding: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
+  }
+  
+  /* PDF Preview Modal */
+  .pdf-preview-modal {
+    padding: var(--spacing-sm);
+  }
+  
+  .pdf-preview-content {
+    width: 100%;
+    max-height: 80vh;
+  }
+  
+  /* Color Picker */
+  .color-picker-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+  }
+  
+  /* Share Modal */
+  .share-modal .qr-code {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Footer Spacing for Mobile Nav */
+  .footer {
+    margin-bottom: 70px;
+  }
+  
+  /* Hide Desktop Elements */
+  .desktop-only {
+    display: none !important;
+  }
+  
+  /* Show Mobile Elements */
+  .mobile-only {
+    display: block !important;
+  }
+  
+  /* Table Alternative for Mobile */
+  .schedule-table {
+    display: none;
+  }
+  
+  .schedule-mobile-view {
+    display: block;
+  }
+  
+  /* Floating Action Button */
+  .fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary-gold);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99;
+    transition: all var(--transition-normal);
+  }
+  
+  .fab:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+  }
+  
+  .fab svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Small Mobile: < 480px */
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.25rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .color-picker-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .modal-content {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 896px) and (orientation: landscape) {
+  .header {
+    padding: var(--spacing-sm);
+  }
+  
+  .header-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
