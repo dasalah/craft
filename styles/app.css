@@ -24,10 +24,13 @@ body {
   direction: rtl;
   line-height: 1.6;
   color: var(--text-primary);
-  background: var(--bg-primary);
-  background-image: url('../assets/patterns/balochi-pattern.svg');
+  /* Fallback background */
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #E8EDF2 100%);
+  /* Pattern overlay (graceful degradation if file not found) */
+  background-image: url('../assets/patterns/balochi-pattern.svg'), 
+                    linear-gradient(135deg, var(--bg-primary) 0%, #E8EDF2 100%);
   background-attachment: fixed;
-  background-size: 300px 300px;
+  background-size: 300px 300px, cover;
   min-height: 100vh;
   overflow-x: hidden;
 }

@@ -116,7 +116,7 @@ class ShareManager {
     }
 
     // Try native share API if available
-    if (navigator.share && /mobile/i.test(navigator.userAgent)) {
+    if (navigator.share) {
       try {
         await navigator.share({
           title: 'برنامه کلاسی من',

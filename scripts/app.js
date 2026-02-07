@@ -540,8 +540,9 @@ class ScheduleApp {
   getCurrentDay() {
     const dayIndex = new Date().getDay();
     // JavaScript: 0=Sunday, 1=Monday, ..., 6=Saturday
-    // Persian: Saturday=شنبه (0), Sunday=یک‌شنبه (1), ..., Friday=جمعه (6)
-    const persianDayIndex = (dayIndex + 1) % 7;
+    // Persian week: Saturday=شنبه (0), Sunday=یک‌شنبه (1), ..., Friday=جمعه (6)
+    // Mapping: Sat(6)→0, Sun(0)→1, Mon(1)→2, Tue(2)→3, Wed(3)→4, Thu(4)→5, Fri(5)→6
+    const persianDayIndex = dayIndex === 6 ? 0 : dayIndex + 1;
     return this.days[persianDayIndex];
   }
 
