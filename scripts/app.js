@@ -41,7 +41,7 @@ class ScheduleApp {
 
   // Check if student info exists
   checkStudentInfo() {
-    if (window.studentInfo && !window.studentInfo.hasInfo()) {
+    if (window.studentInfo && !window.studentInfo.isComplete()) {
       this.showModal('studentInfoModal');
     }
   }
@@ -62,7 +62,7 @@ class ScheduleApp {
 
   // Schedule Display Functions
   renderSchedule() {
-    const container = document.getElementById('scheduleContainer');
+    const container = document.getElementById('scheduleCards');
     if (!container) return;
 
     let classes = this.schedule;
@@ -416,7 +416,7 @@ class ScheduleApp {
   }
 
   handleSearch(query) {
-    const container = document.getElementById('scheduleContainer');
+    const container = document.getElementById('scheduleCards');
     if (!container) return;
 
     if (!query.trim()) {
